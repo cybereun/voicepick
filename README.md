@@ -19,7 +19,7 @@ VoicePick은 Windows에서 로컬로 실행되는 강의/회의 녹음 및 실�
 - **마이크 품질 진단**: 입력 크기, RMS, 발화 비율을 보고 너무 작거나 큰 입력을 알려줍니다.
 - **로컬 아카이브**: 녹음 목록과 전사 결과를 앱 내부 SQLite DB와 WAV 파일로 저장합니다.
 - **녹음 삭제/고아 WAV 정리**: 목록 삭제 시 연결된 오디오 파일까지 제거하고, DB에 없는 WAV 정리 기능도 제공합니다.
-- **Alt 독립 실행 배포본**: 릴리즈 포터블 패키지는 필요한 모델과 native 모듈을 포함해 Alt 앱 폴더 없이 실행됩니다.
+- **독립 실행 배포본**: 릴리즈 포터블 패키지는 필요한 모델과 native 모듈을 포함해 별도 외부 앱 폴더 없이 실행됩니다.
 
 ## 다운로드
 
@@ -59,7 +59,7 @@ VoicePick은 Windows에서 로컬로 실행되는 강의/회의 녹음 및 실�
 개발 환경에서는 Node.js 24 이상이 필요합니다.
 
 ```powershell
-cd H:\App-2026\Alt\VoicePick
+cd H:\App-2026\VoicePick
 npm start
 ```
 
@@ -80,10 +80,9 @@ npm run check
 
 개발 실행 시 VoicePick은 다음 순서로 모델과 native 리소스를 찾습니다.
 
-- `VOICEPICK_ALT_RESOURCES`
+- `VOICEPICK_RESOURCE_ROOT`
 - `VoicePick\current\resources`
 - 상위 폴더의 `current\resources`
-- 기존 Alt 설치 경로
 
 Whisper 모델은 다음 경로 후보를 사용합니다.
 
@@ -100,7 +99,7 @@ preview 모델은 다음 경로 후보를 사용합니다.
 환경변수로 직접 지정할 수도 있습니다.
 
 ```powershell
-$env:VOICEPICK_ALT_RESOURCES="H:\App-2026\Alt\current\resources"
+$env:VOICEPICK_RESOURCE_ROOT="H:\App-2026\VoicePick\current\resources"
 $env:VOICEPICK_WHISPER_MODEL="H:\App-2026\live-recorder\whisper-cpp\ggml-large-v3-turbo-q5_0.bin"
 $env:VOICEPICK_PREVIEW_MODEL="H:\App-2026\live-recorder\whisper-cpp\ggml-base.bin"
 npm start

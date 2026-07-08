@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
@@ -19,7 +19,7 @@ internal static class Program
         ApplicationConfiguration.Initialize();
         try
         {
-            var baseDir = AppContext.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            var baseDir = AppContext.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, '/');
             var appDir = Directory.Exists(Path.Combine(baseDir, "app")) ? Path.Combine(baseDir, "app") : baseDir;
             if (!await IsServerReady())
             {
@@ -62,7 +62,7 @@ internal static class Program
             RedirectStandardError = true,
         };
         psi.Environment["VOICEPICK_PORT"] = Port.ToString();
-        psi.Environment["VOICEPICK_ALT_RESOURCES"] = Path.Combine(baseDir, "current", "resources");
+        psi.Environment["VOICEPICK_RESOURCE_ROOT"] = Path.Combine(baseDir, "current", "resources");
         psi.Environment["VOICEPICK_WHISPER_MODEL"] = Path.Combine(baseDir, "models", "whisper", "ggml-large-v3-turbo-q5_0.bin");
         psi.Environment["VOICEPICK_PREVIEW_MODEL"] = Path.Combine(baseDir, "models", "whisper", "ggml-base.bin");
         var process = Process.Start(psi) ?? throw new InvalidOperationException("VoicePick 서버를 시작하지 못했습니다.");

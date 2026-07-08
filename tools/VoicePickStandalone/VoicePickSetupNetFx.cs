@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -10,7 +10,7 @@ internal static class VoicePickSetup
     {
         try
         {
-            string setupDir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            string setupDir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, '/');
             string payload = Path.Combine(setupDir, "VoicePick-win-full");
             if (!Directory.Exists(payload))
             {

@@ -10,11 +10,10 @@ const appRoot = resolve(here, "..");
 const workspaceRoot = resolve(appRoot, "..");
 
 const candidates = {
-  altResources: [
-    process.env.VOICEPICK_ALT_RESOURCES,
+  resourceRoots: [
+    process.env.VOICEPICK_RESOURCE_ROOT,
     join(workspaceRoot, "current", "resources"),
     join(appRoot, "current", "resources"),
-    "C:\\Users\\j.u.Eun\\AppData\\Local\\Alt\\current\\resources",
   ].filter(Boolean),
   whisperModels: [
     process.env.VOICEPICK_WHISPER_MODEL,
@@ -43,12 +42,12 @@ async function firstExisting(paths) {
 }
 
 export async function resolveRuntimePaths() {
-  const altResources = await firstExisting(candidates.altResources);
-  const nodeModules = altResources ? join(altResources, "app.asar.unpacked", "node_modules") : null;
+  const resourceRoot = await firstExisting(candidates.resourceRoots);
+  const nodeModules = resourceRoot ? join(resourceRoot, "app.asar.unpacked", "node_modules") : null;
   const whisperModelPath = await firstExisting(candidates.whisperModels);
   const previewModelPath = await firstExisting(candidates.previewModels);
-  const diarizationDir = altResources ? join(altResources, "diarization") : null;
-  const vadModelPath = altResources ? join(altResources, "vad", "ggml-silero-v6.2.0.bin") : null;
+  const diarizationDir = resourceRoot ? join(resourceRoot, "diarization") : null;
+  const vadModelPath = resourceRoot ? join(resourceRoot, "vad", "ggml-silero-v6.2.0.bin") : null;
   const ffmpegPath = nodeModules ? join(nodeModules, "ffmpeg-static", "ffmpeg.exe") : null;
   const openvinoEncoderXml = whisperModelPath
     ? join(dirname(whisperModelPath), "ggml-large-v3-turbo-encoder-openvino.xml")
@@ -60,7 +59,7 @@ export async function resolveRuntimePaths() {
   return {
     appRoot,
     workspaceRoot,
-    altResources,
+    resourceRoot,
     nodeModules,
     whisperModelPath,
     previewModelPath,
@@ -78,14 +77,14 @@ export async function resolveRuntimePaths() {
 }
 
 export async function loadNativeAudio(paths) {
-  if (!paths.nodeModules) throw new Error("Alt native module folder was not found");
+  if (!paths.nodeModules) throw new Error("VoicePick native module folder was not found");
   const entry = join(paths.nodeModules, "native-audio-node", "dist", "index.js");
   await access(entry);
   return import(pathToFileURL(entry).href);
 }
 
 export function loadPyannote(paths) {
-  if (!paths.nodeModules) throw new Error("Alt native module folder was not found");
+  if (!paths.nodeModules) throw new Error("VoicePick native module folder was not found");
   return require(join(paths.nodeModules, "pyannote-cpp-node"));
 }
 

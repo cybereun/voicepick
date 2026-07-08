@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -15,7 +15,7 @@ internal static class VoicePickLauncher
     {
         try
         {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, '/');
             string appDir = Directory.Exists(Path.Combine(baseDir, "app")) ? Path.Combine(baseDir, "app") : baseDir;
             if (!IsServerReady())
             {
@@ -55,7 +55,7 @@ internal static class VoicePickLauncher
         psi.RedirectStandardOutput = true;
         psi.RedirectStandardError = true;
         psi.EnvironmentVariables["VOICEPICK_PORT"] = Port.ToString();
-        psi.EnvironmentVariables["VOICEPICK_ALT_RESOURCES"] = Path.Combine(baseDir, "current", "resources");
+        psi.EnvironmentVariables["VOICEPICK_RESOURCE_ROOT"] = Path.Combine(baseDir, "current", "resources");
         psi.EnvironmentVariables["VOICEPICK_WHISPER_MODEL"] = Path.Combine(baseDir, "models", "whisper", "ggml-large-v3-turbo-q5_0.bin");
         psi.EnvironmentVariables["VOICEPICK_PREVIEW_MODEL"] = Path.Combine(baseDir, "models", "whisper", "ggml-base.bin");
         Process process = Process.Start(psi);

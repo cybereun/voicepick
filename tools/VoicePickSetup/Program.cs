@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -14,7 +14,7 @@ internal static class Program
         ApplicationConfiguration.Initialize();
         try
         {
-            var setupDir = AppContext.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            var setupDir = AppContext.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, '/');
             var payload = Path.Combine(setupDir, "VoicePick-win-full");
             if (!Directory.Exists(payload))
             {
