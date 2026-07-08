@@ -1,0 +1,24 @@
+# runtime data
+/data/
+/.tmp-tests/
+*.log
+*.db
+*.db-shm
+*.db-wal
+
+# generated builds and release payloads
+/dist/
+
+# local models and copied native payloads
+/models/
+/current/
+/node_modules/
+
+# editor/os
+.DS_Store
+Thumbs.db
+*.tmp
+
+# .NET build outputs
+/tools/**/bin/
+/tools/**/obj/

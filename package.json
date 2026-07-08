@@ -1,0 +1,20 @@
+﻿{
+  "name": "voicepick",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Native local lecture recorder with streaming transcription and speaker-aware notes.",
+  "scripts": {
+    "start": "node --no-warnings src/server.mjs",
+    "test": "node --test test\\*.test.mjs",
+    "check": "node --check src/server.mjs && node --check src/native-loader.mjs && node --check src/storage.mjs && node --check src/audio-mixer.mjs && node --check src/pipeline-service.mjs && node --check src/transcript-agreement.mjs && node --check src/speaker-fallback.mjs && node --check src/isolated-pipeline-service.mjs && node --check src/isolated-preview-service.mjs && node --check src/transcription-child.mjs && node --check src/preview-child.mjs && node --check src/recording-controller.mjs && node --check public/app.js"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
+
+
+
+
+

@@ -1,0 +1,97 @@
+﻿<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VoicePick</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">VoicePick</p>
+          <h1>라이브 강의 녹음</h1>
+        </div>
+        <div class="status-pill" id="statusPill">
+          <span class="status-dot"></span>
+          <span id="statusText">시작 중</span>
+        </div>
+      </header>
+
+      <section class="controls">
+        <button class="record-button" id="recordButton" type="button">
+          <span class="record-dot"></span>
+          <span id="recordButtonText">녹음 시작</span>
+        </button>
+        <input id="titleInput" class="input title-input" placeholder="녹음 제목" />
+        <select id="sourceSelect" class="input">
+          <option value="microphone">마이크</option>
+          <option value="system">컴퓨터 소리</option>
+          <option value="mixed">마이크+컴퓨터</option>
+        </select>
+        <select id="deviceSelect" class="input"></select>
+        <select id="languageSelect" class="input">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+          <option value="ja">일본어</option>
+          <option value="zh">중국어</option>
+        </select>
+        <select id="backendSelect" class="input">
+          <option value="auto">GPU 자동</option>
+          <option value="vulkan">Vulkan</option>
+          <option value="openvino">OpenVINO</option>
+        </select>
+        <label class="toggle">
+          <input id="diarizationToggle" type="checkbox" checked />
+          <span>화자분리</span>
+        </label>
+      </section>
+
+      <section class="meter">
+        <canvas id="meterCanvas" width="1200" height="130"></canvas>
+        <div id="micQualityPanel" class="mic-quality is-idle">
+          <span id="micQualityText">마이크 대기</span>
+          <span id="micQualityStats">Peak 0% · RMS 0% · 발화 0%</span>
+        </div>
+        <div class="meter-footer">
+          <span id="levelText">입력 0%</span>
+          <span id="sourceLevelText">마이크 0% · 컴퓨터 0%</span>
+          <span id="engineText">엔진 확인 중</span>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="sidebar">
+          <div class="section-head">
+            <h2>녹음 목록</h2>
+            <div class="section-actions">
+              <button class="text-button" id="cleanupButton" type="button">WAV 정리</button>
+              <button class="text-button" id="refreshButton" type="button">새로고침</button>
+            </div>
+          </div>
+          <div id="recordings" class="recordings"></div>
+        </aside>
+
+        <section class="transcript">
+          <div class="section-head transcript-head">
+            <div>
+              <h2 id="activeTitle">새 녹음</h2>
+              <p id="activeMeta" class="muted">대기</p>
+            </div>
+            <div class="actions">
+              <button class="text-button" id="copyButton" type="button">복사</button>
+              <button class="text-button danger" id="deleteButton" type="button">삭제</button>
+            </div>
+          </div>
+          <div id="liveText" class="live-text">아직 전사 결과가 없습니다</div>
+          <div id="segments" class="segments"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
+
+
