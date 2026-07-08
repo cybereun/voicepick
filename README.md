@@ -9,6 +9,10 @@
 
 VoicePick은 Windows에서 로컬로 실행되는 강의/회의 녹음 및 실시간 받아쓰기 앱입니다. 마이크, 컴퓨터 소리, 마이크+컴퓨터 소리를 녹음하고, 로컬 Whisper 엔진과 pyannote 계열 화자분리 엔진을 사용해 인터넷 없이 전사 결과를 만듭니다.
 
+## 스크린샷
+
+![VoicePick 메인 화면](docs/images/voicepick-main.png)
+
 ## 주요 특징
 
 - **로컬 무제한 받아쓰기**: 브라우저 음성 인식 API가 아니라 PC 안의 Whisper 모델로 전사합니다.
